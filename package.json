@@ -1,6 +1,6 @@
 {
   "name": "ethbox",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Launch a simple eth dev sandbox from the command line",
   "main": "index.js",
   "bin": {
