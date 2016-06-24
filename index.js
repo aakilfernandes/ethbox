@@ -3,7 +3,6 @@
 'use strict';
 
 const fs = require('fs')
-const glob = require('glob-fs')()
 const program = require('commander')
 const repl = require('repl')
 const r = repl.start({ prompt: 'EthBox > ' })
