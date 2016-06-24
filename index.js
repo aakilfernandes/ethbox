@@ -55,7 +55,7 @@ if (program.solidityContracts) {
     contracts[contractName].bytecode = hexify(output.contracts[contractName].bytecode)
     contracts[contractName].runtimeBytecode = hexify(output.contracts[contractName].runtimeBytecode)
     contracts[contractName].abi = JSON.parse(output.contracts[contractName].interface)
-    log('Added contractInfo.'+contractName, 'to your environment')
+    log('Added contracts.'+contractName, 'to your environment')
   })
   r.context.contracts = contracts
 }
