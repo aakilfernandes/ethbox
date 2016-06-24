@@ -30,7 +30,7 @@ r.context.provider = provider
 r.context.web3 = web3
 
 if (program.solidityContracts) {
-  log('Searching for solidity contracts in', program.solidityContracts)
+  info('Searching for solidity contracts in', program.solidityContracts)
   const contractFiles = walkSync(program.solidityContracts)
   const sources = {}
 
@@ -55,7 +55,7 @@ if (program.solidityContracts) {
     contracts[contractName].bytecode = hexify(output.contracts[contractName].bytecode)
     contracts[contractName].runtimeBytecode = hexify(output.contracts[contractName].runtimeBytecode)
     contracts[contractName].abi = JSON.parse(output.contracts[contractName].interface)
-    log('Added contracts.'+contractName, 'to your environment')
+    info('Added contracts.'+contractName, 'to your environment')
   })
   r.context.contracts = contracts
 }
@@ -64,6 +64,12 @@ web3.eth.getAccounts(function(err, accounts){
   web3.eth.defaultAccount = accounts[0]
   log('Set default account to', web3.eth.defaultAccount)
   log('Your EthBox is ready. Thanks for waiting!')
+})
+
+web3.eth.filter('latest').watch((err, result) => {
+  web3.eth.getBlock(result, (err, block) => {
+    log('Mined block #' + block.number)
+  })
 })
 
 function walkSync(dir, filelist) {
@@ -84,6 +90,14 @@ function walkSync(dir, filelist) {
 function log(){
   const args = Array.prototype.slice.call(arguments).map((text) => {
     return chalk.green(text)
+  })
+  console.log.apply(this, args)
+  r.displayPrompt()
+}
+
+function info(){
+  const args = Array.prototype.slice.call(arguments).map((text) => {
+    return chalk.gray(text)
   })
   console.log.apply(this, args)
   r.displayPrompt()
