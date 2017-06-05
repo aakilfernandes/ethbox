@@ -15,6 +15,7 @@ log('Welcome to Ethbox! Please wait while we do a little bootstrapping.')
 
 program
   .option('-s, --solidityContracts [value]','solidity contracts directory')
+  .option('-d, --deploy','deploy contracts')
   .parse(process.argv)
 
 const solc = require('solc')
